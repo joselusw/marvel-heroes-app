@@ -11,6 +11,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.heroe_row.view.*
 
 class HeroViewHolder(itemView: View, private val presenter: HeroesPresenter) : RecyclerView.ViewHolder(itemView) {
+    /* -- VARS --*/
     private val iv_image: ImageView = itemView.findViewById(R.id.iv_image)
     private val tv_name: TextView = itemView.findViewById(R.id.tv_name)
     private val tv_description: TextView = itemView.findViewById(R.id.tv_description)
@@ -19,8 +20,8 @@ class HeroViewHolder(itemView: View, private val presenter: HeroesPresenter) : R
         //Set listeners
         itemView.setOnClickListener { presenter.onHeroClicked(hero) }
 
-        //Fullfill info
-        Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(iv_image);
+        //Fulfill info
+        Picasso.get().load(hero.picture).into(iv_image)
         tv_name.text = hero.name
         tv_description.text = hero.description
     }

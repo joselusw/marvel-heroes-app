@@ -8,9 +8,11 @@ import com.jsw.marvelheroes.Activitiy.HomeActivity
 import com.jsw.marvelheroes.R
 
 class SplashActivity : AppCompatActivity() {
+    /* -- VARS --*/
     private val splashTime = 2000L // 3 seconds
     private lateinit var myHandler : Handler
 
+    /* -- FUNCTIONS --*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
