@@ -1,4 +1,4 @@
 package com.jsw.marvelheroes.Model
 
-data class Heroe(val name: String, val description: Int, val picture: String)
-data class Comic(val title: String, val description: Int, val image: String)
+data class Hero(val name: String, val description: String, val picture: String)
+data class Comic(val title: String, val description: String, val image: String)
