@@ -1,14 +1,16 @@
 package com.jsw.marvelheroes.ViewHolder
 
-import androidx.recyclerview.widget.RecyclerView
-import com.jsw.marvelheroes.Model.Hero
-import com.jsw.marvelheroes.Presenter.HeroesPresenter
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.AsyncTask
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.jsw.marvelheroes.R
+import androidx.recyclerview.widget.RecyclerView
+import com.jsw.marvelheroes.Model.Hero
+import com.jsw.marvelheroes.Presenter.HeroesPresenter
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.heroe_row.view.*
+
 
 class HeroViewHolder(itemView: View, private val presenter: HeroesPresenter) : RecyclerView.ViewHolder(itemView) {
     /* -- VARS --*/
@@ -21,9 +23,11 @@ class HeroViewHolder(itemView: View, private val presenter: HeroesPresenter) : R
         itemView.setOnClickListener { presenter.onHeroClicked(hero) }
 
         //Fulfill info
-        Picasso.get().load(hero.picture).into(iv_image)
-        tv_name.text = hero.name
-        tv_description.text = hero.description
+        var url = hero.getThumbnail()?.getURL()
+
+        Picasso.get().load(url).resize(75, 75).centerInside().into(iv_image)
+        tv_name.text = hero.getName()
+        tv_description.text = hero.getDescription()
     }
 }
 

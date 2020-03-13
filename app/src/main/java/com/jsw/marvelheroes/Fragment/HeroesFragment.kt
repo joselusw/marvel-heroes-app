@@ -1,18 +1,21 @@
 package com.jsw.marvelheroes.Fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jsw.marvelheroes.Adapter.HeroesAdapter
+import com.jsw.marvelheroes.Api.HeroesAPI
+import com.jsw.marvelheroes.Api.MarvelApi
 import com.jsw.marvelheroes.Model.Hero
 import com.jsw.marvelheroes.Presenter.HeroesPresenter
 import com.jsw.marvelheroes.R
 import com.jsw.marvelheroes.Repository.HeroesRepository
+
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -34,8 +37,7 @@ class HeroesFragment : Fragment(), HeroesPresenter.View {
         val view =  inflater.inflate(R.layout.fragment_heroes, container, false)
 
         //Initialize repo & presenter
-        val repository = HeroesRepository()
-        presenter = HeroesPresenter(this, repository)
+        presenter = HeroesPresenter(this)
 
         //Initialize view (Old-school style)
         recycler = view?.findViewById(R.id.rv_heroes)

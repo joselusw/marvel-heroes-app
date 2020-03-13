@@ -10,7 +10,7 @@ import com.jsw.marvelheroes.ViewHolder.HeroViewHolder
 
 internal class HeroesAdapter(private val presenter: HeroesPresenter) : RecyclerView.Adapter<HeroViewHolder>() {
     /* -- VARS --*/
-    private val heroes: MutableList<Hero> = ArrayList()
+    private val heroes: ArrayList<Hero> = ArrayList()
 
     /* -- OVERRIDE FUNCTIONS --*/
     override fun onBindViewHolder(holder: HeroViewHolder, position: Int) {
@@ -25,6 +25,10 @@ internal class HeroesAdapter(private val presenter: HeroesPresenter) : RecyclerV
 
     override fun getItemCount(): Int {
         return heroes.size
+    }
+
+    override fun getItemId(position: Int): Long {
+        return heroes[position].getId()?.toLong()!!
     }
 
     /* -- ADAPTER FUNCTIONS --*/
