@@ -1,11 +1,14 @@
 package com.jsw.marvelheroes.Activitiy
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.jsw.marvelheroes.Fragment.ComicFragment
+import com.jsw.marvelheroes.Fragment.DetailFragment
 import com.jsw.marvelheroes.Fragment.HeroesFragment
+import com.jsw.marvelheroes.Model.Comic
+import com.jsw.marvelheroes.Model.Hero
 import com.jsw.marvelheroes.R
-
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -14,5 +17,45 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
+
+        var fragment: Fragment? = HeroesFragment()
+
+        if (fragment != null) {
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.add(R.id.nav_host_fragment, fragment, "HERO-COMIC")
+            transaction.commit()
+        }
+    }
+
+    override fun onBackPressed() {
+        val count = supportFragmentManager.backStackEntryCount
+        if (count == 0) {
+            super.onBackPressed()
+            //additional code
+        } else {
+            supportFragmentManager.popBackStack()
+        }
+    }
+
+    fun openComicFragment(hero: Hero) {
+        var fragment: Fragment? = ComicFragment(hero)
+
+        if (fragment != null) {
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.nav_host_fragment, fragment)
+            transaction.addToBackStack("HERO-COMIC")
+            transaction.commit()
+        }
+    }
+
+    fun openDetailsFragment(comic: Comic) {
+        var fragment: Fragment? = DetailFragment()
+
+        if (fragment != null) {
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.nav_host_fragment, fragment)
+            transaction.addToBackStack("COMIC-DETAILS")
+            transaction.commit()
+        }
     }
 }

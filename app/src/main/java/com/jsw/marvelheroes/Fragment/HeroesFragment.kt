@@ -8,6 +8,7 @@ import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.jsw.marvelheroes.Activitiy.HomeActivity
 import com.jsw.marvelheroes.Adapter.HeroesAdapter
 import com.jsw.marvelheroes.Api.HeroesAPI
 import com.jsw.marvelheroes.Api.MarvelApi
@@ -64,7 +65,8 @@ class HeroesFragment : Fragment(), HeroesPresenter.View {
         progressBar?.visibility = View.GONE
     }
 
-    override fun openComics(heroName: String) {
+    override fun openComics(hero: Hero) {
+        (activity as HomeActivity).openComicFragment(hero)
     }
 
     override fun showLoading() {

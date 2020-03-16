@@ -19,7 +19,7 @@ internal class HeroesAdapter(private val presenter: HeroesPresenter) : RecyclerV
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeroViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.heroe_row, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.holder_row, parent, false)
         return HeroViewHolder(view, presenter)
     }
 

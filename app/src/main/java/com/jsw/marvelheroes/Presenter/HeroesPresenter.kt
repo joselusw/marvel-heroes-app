@@ -30,7 +30,9 @@ class HeroesPresenter(view: View) : LifecycleObserver, CoroutineScope by MainSco
         view?.hideLoading()
     }
 
-    fun onHeroClicked(hero: Hero) = hero.getName()?.let { view?.openComics(it) }
+    fun onHeroClicked(hero: Hero){
+        view?.openComics(hero)
+    }
 
     fun getFiltered(name: String) {
         view?.fillList(repository.getFiltered(name))
@@ -39,7 +41,7 @@ class HeroesPresenter(view: View) : LifecycleObserver, CoroutineScope by MainSco
     interface View {
         fun fillList(heroes: List<Hero>)
         fun hideLoading()
-        fun openComics(heroName: String)
+        fun openComics(hero: Hero)
         fun showLoading()
     }
 }
