@@ -24,6 +24,9 @@ class SplashActivity : AppCompatActivity() {
         },splashTime)
     }
 
+    /**
+     * Display the main activity and finish the current one
+     */
     private fun goToMainActivity(){
         val mainActivityIntent = Intent(applicationContext, HomeActivity::class.java)
         startActivity(mainActivityIntent)

@@ -8,7 +8,6 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ProgressBar
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -60,28 +59,6 @@ class HeroesFragment : Fragment(), HeroesPresenter.View, IOnBackPressed {
         return view
     }
 
-
-    /* -- PRESENTER FUNCTIONS --*/
-
-    override fun fillList(heroes: List<Hero>) {
-        adapter.clearAdapter()
-        adapter.fillAdapter(heroes)
-        recycler?.post(Runnable { adapter.notifyDataSetChanged() })
-
-    }
-
-    override fun hideLoading() {
-        progressBar?.visibility = View.GONE
-    }
-
-    override fun openComics(hero: Hero) {
-        (activity as HomeActivity).openComicFragment(hero)
-    }
-
-    override fun showLoading() {
-        progressBar?.visibility = View.VISIBLE
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.search_menu, menu)
@@ -100,37 +77,97 @@ class HeroesFragment : Fragment(), HeroesPresenter.View, IOnBackPressed {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onBackPressed(): Boolean {
+        if (search_bar?.visibility == View.VISIBLE) {
+            hideSearch()
+            return true
+        }
+        return false
+    }
+
+
+    /* -- PRESENTER FUNCTIONS --*/
+
+    /**
+     * Fill the adapter
+     */
+    override fun fillList(heroes: List<Hero>) {
+        adapter.clearAdapter()
+        adapter.fillAdapter(heroes)
+        recycler?.post(Runnable { adapter.notifyDataSetChanged() })
+
+    }
+
+    /**
+     * Hide the loading progressBar
+     */
+    override fun hideLoading() {
+        progressBar?.visibility = View.GONE
+    }
+
+    /**
+     * Call the activity to open ComicFragment
+     */
+    override fun openComics(hero: Hero) {
+        (activity as HomeActivity).openComicFragment(hero)
+    }
+
+    /**
+     * Show the loading progressBar
+     */
+    override fun showLoading() {
+        progressBar?.visibility = View.VISIBLE
+    }
+
     /* -- PRIVATE FUNCTIONS --*/
+
+    /**
+     * Setup the RecyclerView
+     */
     private fun setupRecycler() {
         val layoutManager = LinearLayoutManager(context)
         adapter = HeroesAdapter(presenter)
         recycler?.adapter = adapter
         recycler?.layoutManager = layoutManager
+
+        // Hide keyboard if user swipes
         recycler?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 hideKeyboard()
                 super.onScrollStateChanged(recyclerView, newState)
             }
         })
+
+        // Load more content if user is near of the bottom
         adapter.setOnBottomReachedListener(object : OnBottomReachedListener {
             override fun onBottomReached(position: Int) {
-                if (search_bar?.text!!.isEmpty()) presenter.loadHeroes(null, true)
-                else presenter.loadHeroes(search_bar?.text.toString(), true)
+                if (search_bar?.text!!.isEmpty()) presenter.loadHeroes(null, true, true)
+                else presenter.loadHeroes(search_bar?.text.toString(), true, true)
             }
         })
     }
 
+    /**
+     * Hide the soft keyboard
+     */
     private fun hideKeyboard() {
         val inputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
+    /**
+     * Show the soft keyboard
+     */
     private fun showKeyboard() {
         val inputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.showSoftInput(search_bar, InputMethodManager.SHOW_IMPLICIT)
     }
 
+    /**
+     * Setup the search bar which filters
+     */
     private fun setupSearchBar() {
+        //Only filter when user press key instead of 'onTextChanged', so less calls will be executed
         search_bar?.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
                 // If the event is a key-down event on the "enter" button
@@ -143,7 +180,10 @@ class HeroesFragment : Fragment(), HeroesPresenter.View, IOnBackPressed {
             }
         })
     }
-    
+
+    /**
+     * Perform an animator to hide the search bar
+     */
     fun hideSearch() {
         if (search_bar == null)
             return
@@ -160,6 +200,7 @@ class HeroesFragment : Fragment(), HeroesPresenter.View, IOnBackPressed {
         animator.duration = 300
         animator.start()
 
+        //Add a listener to set the view to GONE once animation finishes
         animator.addListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animator: Animator) {}
             override fun onAnimationEnd(animator: Animator) {
@@ -171,16 +212,11 @@ class HeroesFragment : Fragment(), HeroesPresenter.View, IOnBackPressed {
             override fun onAnimationRepeat(animator: Animator) {}
         })
     }
-
-    override fun onBackPressed(): Boolean {
-        if (search_bar?.visibility == View.VISIBLE) {
-            hideSearch()
-            return true
-        }
-        return false
-    }
 }
 
+/**
+ * Shows the Editext with an animator
+ */
 private fun EditText.show() {
     // get the center for the clipping circle
     // get the center for the clipping circle

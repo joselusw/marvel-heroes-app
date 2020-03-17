@@ -16,7 +16,7 @@ import com.jsw.marvelheroes.Model.Hero
 import com.jsw.marvelheroes.Presenter.ComicPresenter
 import com.jsw.marvelheroes.R
 
-class ComicFragment(private val hero: Hero)  : Fragment(), ComicPresenter.View {
+class ComicFragment(private val hero: Hero) : Fragment(), ComicPresenter.View {
 
     /* -- VARS --*/
     private lateinit var presenter: ComicPresenter
@@ -25,7 +25,11 @@ class ComicFragment(private val hero: Hero)  : Fragment(), ComicPresenter.View {
     private var progressBar: ProgressBar? = null
 
     /* -- LIFECYCLE FUNCTIONS --*/
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_comic, container, false)
 
@@ -40,10 +44,6 @@ class ComicFragment(private val hero: Hero)  : Fragment(), ComicPresenter.View {
         activity?.setTitle(R.string.title_comic)
         //Finally return view
         return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
 
@@ -77,7 +77,7 @@ class ComicFragment(private val hero: Hero)  : Fragment(), ComicPresenter.View {
 
         adapter.setOnBottomReachedListener(object : OnBottomReachedListener {
             override fun onBottomReached(position: Int) {
-               presenter.loadComics()
+                presenter.loadComics(true)
             }
         })
     }

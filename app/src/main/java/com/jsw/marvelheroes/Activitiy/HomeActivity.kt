@@ -14,13 +14,14 @@ import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
+    /* -- FUNCTIONS --*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
 
+        // Setup initial fragment
         var fragment: Fragment? = HeroesFragment()
-
         if (fragment != null) {
             val transaction = supportFragmentManager.beginTransaction()
             transaction.add(R.id.nav_host_fragment, fragment, "HERO-COMIC")
@@ -40,6 +41,9 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Open comics list for certain hero
+     */
     fun openComicFragment(hero: Hero) {
         var fragment: Fragment? = ComicFragment(hero)
 
@@ -51,6 +55,9 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Open the comic details
+     */
     fun openDetailsFragment(comic: Comic) {
         var fragment: Fragment? = DetailFragment(comic)
 

@@ -1,11 +1,11 @@
 package com.jsw.marvelheroes.Model
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
 
 class ComicDate {
     @SerializedName("type")
-    private var type : String? = null
+    private var type: String? = null
+
     @SerializedName("date")
     private var date: String? = null
 
@@ -14,5 +14,7 @@ class ComicDate {
         this.date = date
     }
 
-    fun getDate(): String? {return date}
+    fun getDate(): String? {
+        return date
+    }
 }

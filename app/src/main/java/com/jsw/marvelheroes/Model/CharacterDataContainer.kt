@@ -2,10 +2,6 @@ package com.jsw.marvelheroes.Model
 
 import com.google.gson.annotations.SerializedName
 
-
-/**
- * Created by Mohsen on 20/10/2016.
- */
 class CharacterDataContainer {
     @SerializedName("total")
     var total = 0

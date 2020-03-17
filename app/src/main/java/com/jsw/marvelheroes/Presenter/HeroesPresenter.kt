@@ -1,13 +1,12 @@
 package com.jsw.marvelheroes.Presenter
 
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
 import com.jsw.marvelheroes.Api.HeroesAPI
 import com.jsw.marvelheroes.Api.MarvelApi
 import com.jsw.marvelheroes.Model.Hero
 import com.jsw.marvelheroes.Repository.HeroesRepository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
 
 class HeroesPresenter(view: View) : LifecycleObserver, CoroutineScope by MainScope() {
     /* -- VARS --*/
@@ -20,8 +19,9 @@ class HeroesPresenter(view: View) : LifecycleObserver, CoroutineScope by MainSco
         loadHeroes(null)
     }
 
-    fun loadHeroes(name: String?, pagination: Boolean = false) {
-        view?.showLoading()
+    fun loadHeroes(name: String?, pagination: Boolean = false, hideHint: Boolean = false) {
+        if (!hideHint)
+            view?.showLoading()
         repository.getAll(name, pagination, this)
     }
 
@@ -30,7 +30,7 @@ class HeroesPresenter(view: View) : LifecycleObserver, CoroutineScope by MainSco
         view?.hideLoading()
     }
 
-    fun onHeroClicked(hero: Hero){
+    fun onHeroClicked(hero: Hero) {
         view?.openComics(hero)
     }
 

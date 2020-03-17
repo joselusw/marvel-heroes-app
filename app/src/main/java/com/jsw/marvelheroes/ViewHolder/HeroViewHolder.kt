@@ -10,7 +10,8 @@ import com.jsw.marvelheroes.Presenter.HeroesPresenter
 import com.jsw.marvelheroes.R
 
 
-class HeroViewHolder(itemView: View, private val presenter: HeroesPresenter) : RecyclerView.ViewHolder(itemView) {
+class HeroViewHolder(itemView: View, private val presenter: HeroesPresenter) :
+    RecyclerView.ViewHolder(itemView) {
     /* -- VARS --*/
     private val iv_image: ImageView = itemView.findViewById(R.id.iv_image)
     private val tv_name: TextView = itemView.findViewById(R.id.tv_name)

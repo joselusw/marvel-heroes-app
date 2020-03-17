@@ -6,8 +6,8 @@ import com.jsw.marvelheroes.Api.MarvelApi
 import com.jsw.marvelheroes.Model.Comic
 import com.jsw.marvelheroes.Model.Hero
 import com.jsw.marvelheroes.Repository.ComicRepository
-import com.jsw.marvelheroes.Repository.HeroesRepository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
 
 class ComicPresenter(view: View, hero: Hero) : LifecycleObserver, CoroutineScope by MainScope() {
     /* -- VARS --*/
@@ -21,8 +21,9 @@ class ComicPresenter(view: View, hero: Hero) : LifecycleObserver, CoroutineScope
         loadComics()
     }
 
-    fun loadComics() {
-        view?.showLoading()
+    fun loadComics(hideHint: Boolean = false) {
+        if (!hideHint)
+            view?.showLoading()
         hero.getId()?.let { repository.getAll(this, it) }
     }
 
@@ -31,7 +32,7 @@ class ComicPresenter(view: View, hero: Hero) : LifecycleObserver, CoroutineScope
         view?.hideLoading()
     }
 
-    fun onComicClicked(comic: Comic){
+    fun onComicClicked(comic: Comic) {
         view?.openComic(comic)
     }
 

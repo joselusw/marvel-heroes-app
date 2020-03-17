@@ -1,7 +1,5 @@
 package com.jsw.marvelheroes.Utils
 
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import java.security.MessageDigest
 
 class Utils {

@@ -20,11 +20,12 @@ interface MarvelApi {
     ): Call<CharacterDataWrapper>
 
     @GET("/v1/public/characters/{characterId}/comics")
-    fun getComicsByCharacterId(@Path("characterId") characterId: String,
-                                      @Query("apikey") apiKey: String,
-                                      @Query("hash") hash: String,
-                                      @Query("ts") ts: Long,
-                                      @Query("offset") limit: Int,
-                                      @Query("limit") orderBy: Int)
-            : Call<ComicDataWrapper>
+    fun getComicsByCharacterId(
+        @Path("characterId") characterId: String,
+        @Query("apikey") apiKey: String,
+        @Query("hash") hash: String,
+        @Query("ts") ts: Long,
+        @Query("offset") limit: Int,
+        @Query("limit") orderBy: Int
+    ): Call<ComicDataWrapper>
 }

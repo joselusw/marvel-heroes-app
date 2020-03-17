@@ -21,7 +21,7 @@ class HeroesRepository constructor(val marvelApi: MarvelApi) {
     val defaultLimit = 50
     var offset = 0
     val hash = Utils().MD5(timestamp.toString() + Utils().private_key + Utils().public_key)
-    var getAllRequest: Boolean = false
+
     /* -- FUNCTIONS --*/
     init {
         superHeroes = ArrayList()
@@ -34,28 +34,28 @@ class HeroesRepository constructor(val marvelApi: MarvelApi) {
             offset = 0
         }
 
-            val call: Call<CharacterDataWrapper> =
-                marvelApi.getCharacters(Utils().public_key, hash, timestamp, offset, defaultLimit, name)
+        val call: Call<CharacterDataWrapper> =
+            marvelApi.getCharacters(Utils().public_key, hash, timestamp, offset, defaultLimit, name)
 
-            call.enqueue(object : Callback<CharacterDataWrapper?> {
-                override fun onResponse(
-                    call: Call<CharacterDataWrapper?>?,
-                    response: Response<CharacterDataWrapper?>
-                ) {
-                    var list =
-                        response.body()?.getData()?.getResults()?.toList() as? ArrayList<Hero>
+        call.enqueue(object : Callback<CharacterDataWrapper?> {
+            override fun onResponse(
+                call: Call<CharacterDataWrapper?>?,
+                response: Response<CharacterDataWrapper?>
+            ) {
+                var list =
+                    response.body()?.getData()?.getResults()?.toList() as? ArrayList<Hero>
 
-                    if (list != null) {
-                        superHeroes.addAll(list)
-                        offset += 50
-                    }
-
-                    callback.displayHeroes(superHeroes)
+                if (list != null) {
+                    superHeroes.addAll(list)
+                    offset += 50
                 }
 
-                override fun onFailure(call: Call<CharacterDataWrapper?>?, t: Throwable?) {
-                    Log.e("HEROES PRESENTER: ", t?.message)
-                }
-            })
-        }
+                callback.displayHeroes(superHeroes)
+            }
+
+            override fun onFailure(call: Call<CharacterDataWrapper?>?, t: Throwable?) {
+                Log.e("HEROES PRESENTER: ", t?.message)
+            }
+        })
+    }
 }

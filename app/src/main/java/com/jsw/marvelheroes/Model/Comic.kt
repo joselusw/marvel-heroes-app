@@ -1,96 +1,94 @@
 package com.jsw.marvelheroes.Model
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
-import kotlin.collections.ArrayList
 
 class Comic {
     @SerializedName("id")
-    private var id : Int? = null
+    private var id: Int? = null
 
     @SerializedName("digitalId")
-    private var digitalId : Int? = null
+    private var digitalId: Int? = null
 
     @SerializedName("title")
-    private var title : String? = null
+    private var title: String? = null
 
     @SerializedName("issueNumber")
-    private var issueNumber : Double? = null
+    private var issueNumber: Double? = null
 
     @SerializedName("variantDescription")
-    private var variantDescription : String? = null
+    private var variantDescription: String? = null
 
     @SerializedName("description")
-    private var description : String? = null
+    private var description: String? = null
 
     @SerializedName("modified")
-    private var modified : String? = null
+    private var modified: String? = null
 
     @SerializedName("isbn")
-    private var isbn : String? = null
+    private var isbn: String? = null
 
     @SerializedName("upc")
-    private var upc : String? = null
+    private var upc: String? = null
 
     @SerializedName("diamondCode")
-    private var diamondCode : String? = null
+    private var diamondCode: String? = null
 
     @SerializedName("ean")
-    private var ean : String? = null
+    private var ean: String? = null
 
     @SerializedName("issn")
-    private var issn : String? = null
+    private var issn: String? = null
 
     @SerializedName("format")
-    private var format : String? = null
+    private var format: String? = null
 
     @SerializedName("pageCount")
-    private var pageCount : Int? = null
+    private var pageCount: Int? = null
 
     @SerializedName("textObjects")
-    private var textObjects : Any? = null
+    private var textObjects: Any? = null
 
     @SerializedName("resourceURI")
-    private var resourceURI : String? = null
+    private var resourceURI: String? = null
 
     @SerializedName("urls")
-    private var urls : Any? = null
+    private var urls: Any? = null
 
     @SerializedName("series")
-    private var series : Any? = null
+    private var series: Any? = null
 
     @SerializedName("variants")
-    private var variants : Any? = null
+    private var variants: Any? = null
 
     @SerializedName("collections")
-    private var collections : Any? = null
+    private var collections: Any? = null
 
     @SerializedName("collectedIssues")
-    private var collectedIssues : Any? = null
+    private var collectedIssues: Any? = null
 
     @SerializedName("dates")
-    private var dates : ArrayList<ComicDate>? = null
+    private var dates: ArrayList<ComicDate>? = null
 
     @SerializedName("prices")
-    private var prices : Any? = null
+    private var prices: Any? = null
 
     @SerializedName("thumbnail")
-    private var thumbnail : Thumbnail? = null
+    private var thumbnail: Thumbnail? = null
 
     @SerializedName("images")
-    private var images : Any? = null
+    private var images: Any? = null
 
     @SerializedName("creators")
-    private var creators : Any? = null
+    private var creators: Any? = null
 
     @SerializedName("characters")
-    private var characters : Any? = null
+    private var characters: Any? = null
 
     @SerializedName("stories")
-    private var stories : Any? = null
+    private var stories: Any? = null
 
     @SerializedName("events")
-    private var events : Any? = null
+    private var events: Any? = null
 
     constructor()
     constructor(
@@ -155,9 +153,20 @@ class Comic {
         this.events = events
     }
 
-    fun geTitle(): String? {return title}
-    fun getDescription() : String? {return description}
-    fun getThumbnail() : Thumbnail? {return thumbnail}
-    fun getDates() : ArrayList<ComicDate>? {return dates}
+    fun geTitle(): String? {
+        return title
+    }
+
+    fun getDescription(): String? {
+        return description
+    }
+
+    fun getThumbnail(): Thumbnail? {
+        return thumbnail
+    }
+
+    fun getDates(): ArrayList<ComicDate>? {
+        return dates
+    }
 
 }

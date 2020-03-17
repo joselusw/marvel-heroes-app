@@ -9,7 +9,8 @@ import com.jsw.marvelheroes.Presenter.ComicPresenter
 import com.jsw.marvelheroes.R
 import com.jsw.marvelheroes.ViewHolder.ComicViewHolder
 
-internal class ComicAdapter(private val presenter: ComicPresenter) : RecyclerView.Adapter<ComicViewHolder>() {
+internal class ComicAdapter(private val presenter: ComicPresenter) :
+    RecyclerView.Adapter<ComicViewHolder>() {
     /* -- VARS --*/
     private val comics: ArrayList<Comic> = ArrayList()
     private var onBottomReachedListener: OnBottomReachedListener? = null
@@ -18,7 +19,8 @@ internal class ComicAdapter(private val presenter: ComicPresenter) : RecyclerVie
     override fun onBindViewHolder(holder: ComicViewHolder, position: Int) {
         val comic = comics[position]
         holder.render(comic)
-        if (position == comics.size - 20){ onBottomReachedListener?.onBottomReached(position); }
+        if (position == comics.size - 20) {
+            onBottomReachedListener?.onBottomReached(position); }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicViewHolder {
@@ -36,14 +38,24 @@ internal class ComicAdapter(private val presenter: ComicPresenter) : RecyclerVie
     }
 
     /* -- ADAPTER FUNCTIONS --*/
+
+    /**
+     * Clean the collection
+     */
     fun clearAdapter() {
         comics.clear()
     }
 
+    /**
+     * Fulfill the collection
+     */
     fun fillAdapter(collection: List<Comic>) {
         comics.addAll(collection)
     }
 
+    /**
+     * Set the listener
+     */
     fun setOnBottomReachedListener(onBottomReachedListener: OnBottomReachedListener?) {
         this.onBottomReachedListener = onBottomReachedListener
     }

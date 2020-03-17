@@ -5,25 +5,25 @@ import com.google.gson.annotations.SerializedName
 class ComicDataWrapper {
 
     @SerializedName("code")
-    private var code : Int? = null
+    private var code: Int? = null
 
     @SerializedName("status")
-    private var status : String? = null
+    private var status: String? = null
 
     @SerializedName("copyright")
-    private var copyright : String? = null
+    private var copyright: String? = null
 
     @SerializedName("attributionText")
-    private var attributionText : String? = null
+    private var attributionText: String? = null
 
     @SerializedName("attributionHTML")
-    private var attributionHTML : String? = null
+    private var attributionHTML: String? = null
 
     @SerializedName("data")
-    private var data : ComicDataContainer? = null
+    private var data: ComicDataContainer? = null
 
     @SerializedName("etag")
-    private var etag : String? = null
+    private var etag: String? = null
 
     constructor(
         code: Int?,
@@ -43,5 +43,7 @@ class ComicDataWrapper {
         this.etag = etag
     }
 
-    fun getData(): ComicDataContainer? {return data}
+    fun getData(): ComicDataContainer? {
+        return data
+    }
 }

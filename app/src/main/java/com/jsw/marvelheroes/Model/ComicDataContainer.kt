@@ -4,19 +4,19 @@ import com.google.gson.annotations.SerializedName
 
 class ComicDataContainer {
     @SerializedName("offset")
-    private var offset : Int? = null
+    private var offset: Int? = null
 
     @SerializedName("limit")
-    private var limit : Int? = null
+    private var limit: Int? = null
 
     @SerializedName("total")
-    private var total : Int? = null
+    private var total: Int? = null
 
     @SerializedName("count")
-    private var count : Int? = null
+    private var count: Int? = null
 
     @SerializedName("results")
-    private var results : ArrayList<Comic>? = null
+    private var results: ArrayList<Comic>? = null
 
     constructor(offset: Int?, limit: Int?, total: Int?, count: Int?, results: ArrayList<Comic>?) {
         this.offset = offset
@@ -26,5 +26,7 @@ class ComicDataContainer {
         this.results = results
     }
 
-    fun getComics(): ArrayList<Comic>? {return results}
+    fun getComics(): ArrayList<Comic>? {
+        return results
+    }
 }
