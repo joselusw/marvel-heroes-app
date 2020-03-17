@@ -1,5 +1,3 @@
-MarvelHeroes
-
 José Luis del Pino Gallardo - Marvel heroes APP
 ===========================================
 Copyright (C) 2020 JoseluSW.
