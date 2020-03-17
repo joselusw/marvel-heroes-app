@@ -38,6 +38,7 @@ class DetailFragment(comic: Comic) : Fragment() {
         view?.findViewById<TextView>(R.id.tv_detail_title)?.text = comic.geTitle()
         view?.findViewById<TextView>(R.id.tv_detail_year)?.text = comic.getDates()?.get(0)?.getDate()
         view?.findViewById<TextView>(R.id.tv_detail_desc)?.text = comic.getDescription()
+        activity?.setTitle(R.string.title_details)
         return view
     }
 }

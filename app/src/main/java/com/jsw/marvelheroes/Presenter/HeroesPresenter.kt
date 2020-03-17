@@ -16,12 +16,12 @@ class HeroesPresenter(view: View) : LifecycleObserver, CoroutineScope by MainSco
 
     /* -- FUNCTIONS --*/
     init {
-        view.showLoading()
         repository = HeroesRepository(HeroesAPI.getInstance().create(MarvelApi::class.java))
         loadHeroes(null)
     }
 
     fun loadHeroes(name: String?, pagination: Boolean = false) {
+        view?.showLoading()
         repository.getAll(name, pagination, this)
     }
 

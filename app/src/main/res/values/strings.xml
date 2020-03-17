@@ -8,4 +8,7 @@
     <string name="previous">Previous</string>
 
     <string name="search_hint">Search…</string>
+    <string name="title_comic">Comics</string>
+    <string name="title_characters">Characters</string>
+    <string name="title_details">Details</string>
 </resources>

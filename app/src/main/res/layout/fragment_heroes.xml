@@ -13,7 +13,7 @@
             android:hint="@string/search_hint"
             android:singleLine="true"
             app:layout_constraintTop_toTopOf="parent"
-            android:visibility="visible"
+            android:visibility="gone"
             android:padding="20dp"
             android:background="@drawable/search_background"/>
 

@@ -3,14 +3,12 @@ package com.jsw.marvelheroes.Fragment
 import android.animation.Animator
 import android.app.Activity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.*
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ProgressBar
-import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -56,6 +54,7 @@ class HeroesFragment : Fragment(), HeroesPresenter.View, IOnBackPressed {
         setupSearchBar()
 
         setHasOptionsMenu(true)
+        activity?.setTitle(R.string.title_characters)
 
         //Finally return view
         return view
@@ -93,8 +92,11 @@ class HeroesFragment : Fragment(), HeroesPresenter.View, IOnBackPressed {
             hideSearch()
             hideKeyboard()
         }
-        else
+        else {
             search_bar?.show()
+            search_bar?.requestFocus()
+            showKeyboard()
+        }
         return super.onOptionsItemSelected(item)
     }
 
@@ -121,6 +123,11 @@ class HeroesFragment : Fragment(), HeroesPresenter.View, IOnBackPressed {
     private fun hideKeyboard() {
         val inputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
+    }
+
+    private fun showKeyboard() {
+        val inputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.showSoftInput(search_bar, InputMethodManager.SHOW_IMPLICIT)
     }
 
     private fun setupSearchBar() {

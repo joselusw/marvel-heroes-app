@@ -22,11 +22,13 @@ class ComicPresenter(view: View, hero: Hero) : LifecycleObserver, CoroutineScope
     }
 
     fun loadComics() {
+        view?.showLoading()
         hero.getId()?.let { repository.getAll(this, it) }
     }
 
     fun displayComics(collection: List<Comic>) {
         view?.fillList(collection)
+        view?.hideLoading()
     }
 
     fun onComicClicked(comic: Comic){
@@ -36,5 +38,7 @@ class ComicPresenter(view: View, hero: Hero) : LifecycleObserver, CoroutineScope
     interface View {
         fun fillList(comics: List<Comic>)
         fun openComic(comic: Comic)
+        fun hideLoading()
+        fun showLoading()
     }
 }
