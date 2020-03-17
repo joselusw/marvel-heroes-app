@@ -1,8 +1,8 @@
 MarvelHeroes
 
-Google Play game services - Android Samples
+José Luis del Pino Gallardo - Marvel heroes APP
 ===========================================
-Copyright (C) 2014 Google Inc.
+Copyright (C) 2020 JoseluSW.
 
 <h2>Contents</h2>
 
