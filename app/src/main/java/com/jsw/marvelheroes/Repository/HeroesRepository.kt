@@ -2,21 +2,14 @@ package com.jsw.marvelheroes.Repository
 
 import android.util.Log
 import com.jsw.marvelheroes.Api.MarvelApi
-import com.jsw.marvelheroes.Model.ApiResponse
+import com.jsw.marvelheroes.Model.CharacterDataWrapper
 import com.jsw.marvelheroes.Model.Hero
 import com.jsw.marvelheroes.Presenter.HeroesPresenter
 import com.jsw.marvelheroes.Utils.Utils
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import org.json.JSONArray
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import java.security.MessageDigest
 import java.util.*
-import java.util.concurrent.ArrayBlockingQueue
-import java.util.concurrent.BlockingQueue
 import kotlin.collections.ArrayList
 
 
@@ -28,19 +21,26 @@ class HeroesRepository constructor(val marvelApi: MarvelApi) {
     val defaultLimit = 50
     var offset = 0
     val hash = Utils().MD5(timestamp.toString() + Utils().private_key + Utils().public_key)
+    var getAllRequest: Boolean = false
     /* -- FUNCTIONS --*/
     init {
         superHeroes = ArrayList()
     }
 
-    fun getAll(callback: HeroesPresenter) {
-            val call: Call<ApiResponse> =
-                marvelApi.getCharacters(Utils().public_key, hash, timestamp, offset, defaultLimit)
+    fun getAll(name: String?, pagination: Boolean, callback: HeroesPresenter) {
 
-            call.enqueue(object : Callback<ApiResponse?> {
+        if (!pagination) {
+            superHeroes.clear()
+            offset = 0
+        }
+
+            val call: Call<CharacterDataWrapper> =
+                marvelApi.getCharacters(Utils().public_key, hash, timestamp, offset, defaultLimit, name)
+
+            call.enqueue(object : Callback<CharacterDataWrapper?> {
                 override fun onResponse(
-                    call: Call<ApiResponse?>?,
-                    response: Response<ApiResponse?>
+                    call: Call<CharacterDataWrapper?>?,
+                    response: Response<CharacterDataWrapper?>
                 ) {
                     var list =
                         response.body()?.getData()?.getResults()?.toList() as? ArrayList<Hero>
@@ -53,13 +53,9 @@ class HeroesRepository constructor(val marvelApi: MarvelApi) {
                     callback.displayHeroes(superHeroes)
                 }
 
-                override fun onFailure(call: Call<ApiResponse?>?, t: Throwable?) {
+                override fun onFailure(call: Call<CharacterDataWrapper?>?, t: Throwable?) {
                     Log.e("HEROES PRESENTER: ", t?.message)
                 }
             })
         }
-
-    fun getFiltered(name: String): List<Hero>  {
-        return superHeroes.filter { it.getName() == name }
-    }
 }

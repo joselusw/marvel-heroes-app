@@ -2,10 +2,8 @@ package com.jsw.marvelheroes.Repository
 
 import android.util.Log
 import com.jsw.marvelheroes.Api.MarvelApi
-import com.jsw.marvelheroes.Model.ApiResponse
 import com.jsw.marvelheroes.Model.Comic
 import com.jsw.marvelheroes.Model.ComicDataWrapper
-import com.jsw.marvelheroes.Model.Hero
 import com.jsw.marvelheroes.Presenter.ComicPresenter
 import com.jsw.marvelheroes.Utils.Utils
 import retrofit2.Call

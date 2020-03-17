@@ -2,7 +2,7 @@ package com.jsw.marvelheroes.Model
 
 import com.google.gson.annotations.SerializedName
 
-class ApiResponse {
+class CharacterDataWrapper {
     @SerializedName("code")
     private var code = 0
 
@@ -22,7 +22,7 @@ class ApiResponse {
     private var attributionHTML: String? = null
 
     @SerializedName("data")
-    private var data: DataResponse? = null
+    private var characterData: CharacterDataContainer? = null
 
     fun CharactersResponse() {}
 
@@ -33,7 +33,7 @@ class ApiResponse {
         eTag: String?,
         copyright: String?,
         attributionHTML: String?,
-        data: DataResponse?
+        characterData: CharacterDataContainer?
     ) {
         this.code = code
         this.status = status
@@ -41,7 +41,7 @@ class ApiResponse {
         this.eTag = eTag
         this.copyright = copyright
         this.attributionHTML = attributionHTML
-        this.data = data
+        this.characterData = characterData
     }
 
     fun getCode(): Int {
@@ -92,11 +92,11 @@ class ApiResponse {
         this.attributionHTML = attributionHTML
     }
 
-    fun getData(): DataResponse? {
-        return data
+    fun getData(): CharacterDataContainer? {
+        return characterData
     }
 
-    fun setData(data: DataResponse?) {
-        this.data = data
+    fun setData(characterData: CharacterDataContainer?) {
+        this.characterData = characterData
     }
 }

@@ -18,11 +18,11 @@ class HeroesPresenter(view: View) : LifecycleObserver, CoroutineScope by MainSco
     init {
         view.showLoading()
         repository = HeroesRepository(HeroesAPI.getInstance().create(MarvelApi::class.java))
-        loadHeroes()
+        loadHeroes(null)
     }
 
-    fun loadHeroes() {
-        val result = repository.getAll(this)
+    fun loadHeroes(name: String?, pagination: Boolean = false) {
+        repository.getAll(name, pagination, this)
     }
 
     fun displayHeroes(collection: List<Hero>) {
@@ -32,10 +32,6 @@ class HeroesPresenter(view: View) : LifecycleObserver, CoroutineScope by MainSco
 
     fun onHeroClicked(hero: Hero){
         view?.openComics(hero)
-    }
-
-    fun getFiltered(name: String) {
-        view?.fillList(repository.getFiltered(name))
     }
 
     interface View {

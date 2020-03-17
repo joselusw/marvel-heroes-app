@@ -6,11 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".Fragment.HeroesFragment">
 
+        <EditText
+            android:id="@+id/et_searchbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/search_hint"
+            android:singleLine="true"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="visible"
+            android:padding="20dp"
+            android:background="@drawable/search_background"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_heroes"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.jsw.marvelheroes.Activitiy.HomeActivity"/>
+        android:layout_height="0dp"
+        tools:context="com.jsw.marvelheroes.Activitiy.HomeActivity"
+        app:layout_constraintTop_toBottomOf="@id/et_searchbar"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ProgressBar
         android:id="@+id/pb_progress"

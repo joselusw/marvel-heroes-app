@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.jsw.marvelheroes.Fragment.ComicFragment
 import com.jsw.marvelheroes.Fragment.DetailFragment
 import com.jsw.marvelheroes.Fragment.HeroesFragment
+import com.jsw.marvelheroes.Interfaces.IOnBackPressed
 import com.jsw.marvelheroes.Model.Comic
 import com.jsw.marvelheroes.Model.Hero
 import com.jsw.marvelheroes.R
@@ -30,8 +31,10 @@ class HomeActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val count = supportFragmentManager.backStackEntryCount
         if (count == 0) {
-            super.onBackPressed()
-            //additional code
+            var fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment)
+            if(fragment is IOnBackPressed)
+                if (!fragment.onBackPressed())
+                    super.onBackPressed()
         } else {
             supportFragmentManager.popBackStack()
         }
