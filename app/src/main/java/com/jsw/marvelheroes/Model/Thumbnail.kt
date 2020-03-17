@@ -17,7 +17,7 @@ class Thumbnail {
     }
 
     fun getURL() : String {
-        path = path?.replace("http", "https")
+        path = path?.replace("http://", "https://")
         return String.format("%s.%s", path, extension)
     }
 

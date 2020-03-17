@@ -21,7 +21,7 @@ class HeroesPresenter(view: View) : LifecycleObserver, CoroutineScope by MainSco
         loadHeroes()
     }
 
-    private fun loadHeroes() {
+    fun loadHeroes() {
         val result = repository.getAll(this)
     }
 

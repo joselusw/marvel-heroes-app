@@ -49,7 +49,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     fun openDetailsFragment(comic: Comic) {
-        var fragment: Fragment? = DetailFragment()
+        var fragment: Fragment? = DetailFragment(comic)
 
         if (fragment != null) {
             val transaction = supportFragmentManager.beginTransaction()

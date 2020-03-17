@@ -25,7 +25,7 @@ class HeroesRepository constructor(val marvelApi: MarvelApi) {
     /* -- VARS --*/
     private var superHeroes: ArrayList<Hero>
     val timestamp = Date().time
-    val defaultLimit = 100
+    val defaultLimit = 50
     var offset = 0
     val hash = Utils().MD5(timestamp.toString() + Utils().private_key + Utils().public_key)
     /* -- FUNCTIONS --*/
@@ -34,7 +34,6 @@ class HeroesRepository constructor(val marvelApi: MarvelApi) {
     }
 
     fun getAll(callback: HeroesPresenter) {
-        if (superHeroes.isEmpty()) {
             val call: Call<ApiResponse> =
                 marvelApi.getCharacters(Utils().public_key, hash, timestamp, offset, defaultLimit)
 
@@ -48,7 +47,7 @@ class HeroesRepository constructor(val marvelApi: MarvelApi) {
 
                     if (list != null) {
                         superHeroes.addAll(list)
-                        offset += 100
+                        offset += 50
                     }
 
                     callback.displayHeroes(superHeroes)
@@ -58,10 +57,7 @@ class HeroesRepository constructor(val marvelApi: MarvelApi) {
                     Log.e("HEROES PRESENTER: ", t?.message)
                 }
             })
-        } else {
-            callback.displayHeroes(superHeroes)
         }
-    }
 
     fun getFiltered(name: String): List<Hero>  {
         return superHeroes.filter { it.getName() == name }

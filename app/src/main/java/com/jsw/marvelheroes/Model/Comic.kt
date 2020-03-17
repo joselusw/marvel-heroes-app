@@ -2,6 +2,7 @@ package com.jsw.marvelheroes.Model
 
 import com.google.gson.annotations.SerializedName
 import java.util.*
+import kotlin.collections.ArrayList
 
 class Comic {
     @SerializedName("id")
@@ -68,7 +69,7 @@ class Comic {
     private var collectedIssues : Any? = null
 
     @SerializedName("dates")
-    private var dates : Any? = null
+    private var dates : ArrayList<ComicDate>? = null
 
     @SerializedName("prices")
     private var prices : Any? = null
@@ -114,7 +115,7 @@ class Comic {
         variants: Any?,
         collections: Any?,
         collectedIssues: Any?,
-        dates: Any?,
+        dates: ArrayList<ComicDate>?,
         prices: Any?,
         thumbnail: Thumbnail?,
         images: Any?,
@@ -157,5 +158,6 @@ class Comic {
     fun geTitle(): String? {return title}
     fun getDescription() : String? {return description}
     fun getThumbnail() : Thumbnail? {return thumbnail}
+    fun getDates() : ArrayList<ComicDate>? {return dates}
 
 }

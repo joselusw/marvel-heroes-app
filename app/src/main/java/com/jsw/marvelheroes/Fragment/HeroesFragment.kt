@@ -10,12 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jsw.marvelheroes.Activitiy.HomeActivity
 import com.jsw.marvelheroes.Adapter.HeroesAdapter
-import com.jsw.marvelheroes.Api.HeroesAPI
-import com.jsw.marvelheroes.Api.MarvelApi
+import com.jsw.marvelheroes.Component.OnBottomReachedListener
 import com.jsw.marvelheroes.Model.Hero
 import com.jsw.marvelheroes.Presenter.HeroesPresenter
 import com.jsw.marvelheroes.R
-import com.jsw.marvelheroes.Repository.HeroesRepository
 
 
 /**
@@ -28,6 +26,7 @@ class HeroesFragment : Fragment(), HeroesPresenter.View {
     private lateinit var adapter: HeroesAdapter
     private var recycler: RecyclerView? = null
     private var progressBar: ProgressBar? = null
+    private var loading: Boolean = false
 
     /* -- LIFECYCLE FUNCTIONS --*/
     override fun onCreateView(
@@ -58,7 +57,8 @@ class HeroesFragment : Fragment(), HeroesPresenter.View {
     override fun fillList(heroes: List<Hero>) {
         adapter.clearAdapter()
         adapter.fillAdapter(heroes)
-        adapter.notifyDataSetChanged()
+        recycler?.post(Runnable { adapter.notifyDataSetChanged() })
+
     }
 
     override fun hideLoading() {
@@ -79,5 +79,10 @@ class HeroesFragment : Fragment(), HeroesPresenter.View {
         adapter = HeroesAdapter(presenter)
         recycler?.adapter = adapter
         recycler?.layoutManager = layoutManager
+        adapter.setOnBottomReachedListener(object : OnBottomReachedListener {
+            override fun onBottomReached(position: Int) {
+                presenter.loadHeroes()
+            }
+        })
     }
 }
